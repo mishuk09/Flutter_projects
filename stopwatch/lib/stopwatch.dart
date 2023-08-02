@@ -11,8 +11,10 @@ class StopWatch extends StatefulWidget {
 class _StopWatchState extends State<StopWatch> {
   int seconds = 0;
   late Timer timer;
-
+  //define variable
   bool _isTicking = false;
+
+  int miliseconds = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class _StopWatchState extends State<StopWatch> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "$seconds Seconds",
+            _secondsText(miliseconds),
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(
@@ -56,10 +58,23 @@ class _StopWatchState extends State<StopWatch> {
             const SizedBox(
               width: 20,
             ),
+            ElevatedButton(
+              onPressed: _isTicking ? _resetTimer : null,
+              style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll<Color>(
+                      Color.fromARGB(255, 183, 75, 3)),
+                  foregroundColor:
+                      MaterialStatePropertyAll<Color>(Colors.white)),
+              child: const Text("Reset "),
+            ),
+            const SizedBox(
+              width: 20,
+            ),
             TextButton(
               onPressed: _isTicking ? _stopTimer : null,
               style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll<Color>(Colors.red),
+                  backgroundColor: MaterialStatePropertyAll<Color>(
+                      Color.fromARGB(255, 255, 17, 0)),
                   foregroundColor:
                       MaterialStatePropertyAll<Color>(Colors.white)),
               child: const Text("Stop"),
@@ -71,9 +86,9 @@ class _StopWatchState extends State<StopWatch> {
   }
 
   void _startTimer() {
-    timer = Timer.periodic(const Duration(seconds: 1), _onTick);
+    timer = Timer.periodic(const Duration(milliseconds: 100), _onTick);
     setState(() {
-      seconds = 0;
+      // miliseconds = 0;
       _isTicking = true;
     });
   }
@@ -90,11 +105,26 @@ class _StopWatchState extends State<StopWatch> {
     });
   }
 
+  void _resetTimer() {
+    setState(() {
+      miliseconds = 0;
+    });
+  }
+
   void _onTick(Timer timer) {
     if (mounted) {
       setState(() {
-        ++seconds;
+        miliseconds += 100;
       });
+    }
+  }
+
+  String _secondsText(int miliseconds) {
+    final seconds = miliseconds / 1000;
+    if (seconds < 1) {
+      return '$seconds second';
+    } else {
+      return '$seconds second';
     }
   }
 
