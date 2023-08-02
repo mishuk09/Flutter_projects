@@ -11,6 +11,9 @@ class StopWatch extends StatefulWidget {
 class _StopWatchState extends State<StopWatch> {
   int seconds = 0;
   late Timer timer;
+
+  bool _isTicking = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,34 +31,63 @@ class _StopWatchState extends State<StopWatch> {
           const SizedBox(
             height: 20,
           ),
-          const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: null,
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStatePropertyAll<Color>(Colors.green),
-                      foregroundColor:
-                          MaterialStatePropertyAll<Color>(Colors.white)),
-                  child: Text("Start"),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                TextButton(
-                  onPressed: null,
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStatePropertyAll<Color>(Colors.red),
-                      foregroundColor:
-                          MaterialStatePropertyAll<Color>(Colors.white)),
-                  child: Text("Stop"),
-                ),
-              ]),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            ElevatedButton(
+              onPressed: _isTicking ? null : _startTimer,
+              style: const ButtonStyle(
+                  backgroundColor:
+                      MaterialStatePropertyAll<Color>(Colors.green),
+                  foregroundColor:
+                      MaterialStatePropertyAll<Color>(Colors.white)),
+              child: const Text("Start"),
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            ElevatedButton(
+              onPressed: _isTicking ? _pauseTimer : null,
+              style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll<Color>(
+                      Color.fromARGB(255, 31, 228, 38)),
+                  foregroundColor:
+                      MaterialStatePropertyAll<Color>(Colors.white)),
+              child: const Text("Pause "),
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            TextButton(
+              onPressed: _isTicking ? _stopTimer : null,
+              style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll<Color>(Colors.red),
+                  foregroundColor:
+                      MaterialStatePropertyAll<Color>(Colors.white)),
+              child: const Text("Stop"),
+            ),
+          ]),
         ],
       ),
     );
+  }
+
+  void _startTimer() {
+    timer = Timer.periodic(const Duration(seconds: 1), _onTick);
+    setState(() {
+      seconds = 0;
+      _isTicking = true;
+    });
+  }
+
+  void _pauseTimer() {
+    timer.cancel();
+    _isTicking = false;
+  }
+
+  void _stopTimer() {
+    timer.cancel();
+    setState(() {
+      _isTicking = false;
+    });
   }
 
   void _onTick(Timer timer) {
@@ -69,12 +101,12 @@ class _StopWatchState extends State<StopWatch> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(const Duration(seconds: 1), _onTick);
+    // timer = Timer.periodic(const Duration(seconds: 1), _onTick);
   }
 
   @override
   void dispose() {
-    timer.cancel();
+    // timer.cancel();
     super.dispose();
   }
 }
