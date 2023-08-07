@@ -13,6 +13,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController pwdController = TextEditingController();
 
   String msg = 'initial values';
+  bool isVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +32,17 @@ class _LoginPageState extends State<LoginPage> {
             ),
             TextField(
               controller: pwdController,
-              obscureText: true,
+              obscureText: !isVisible,
               decoration: InputDecoration(
                 labelText: 'Passssword',
                 prefix: Icon(Icons.key),
                 suffix: IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.visibility_off),
+                  onPressed: () {
+                    isVisible = !isVisible;
+                    setState(() {});
+                  },
+                  icon:
+                      Icon(isVisible ? Icons.visibility : Icons.visibility_off),
                 ),
                 hintText: 'password',
               ),
