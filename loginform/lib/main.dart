@@ -16,3 +16,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(home: Dashboard());
   }
 }
+
+
+//create a class with 3 button and onclick 

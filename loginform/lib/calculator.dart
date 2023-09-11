@@ -11,7 +11,7 @@ class _CalculatorState extends State<Calculator> {
   TextEditingController num1Controller = TextEditingController();
   TextEditingController num2Controller = TextEditingController();
   int result = 0;
-
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,7 @@ class _CalculatorState extends State<Calculator> {
               TextField(
                 controller: num1Controller,
                 decoration: InputDecoration(
-                  labelText: 'Height',
+                labelText: 'Height',
                 ),
               ),
               TextField(
@@ -52,6 +52,7 @@ class _CalculatorState extends State<Calculator> {
               Text(
                 'Result $result',
                 style: TextStyle(),
+
               )
             ],
           ),

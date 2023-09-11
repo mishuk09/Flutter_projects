@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatelessWidget {
-  Dashboard({Key? key}) : super(key: key);
+  Dashboard({Key? key}):super(key: key);
 
   TextStyle heading = TextStyle(fontSize: 24, color: Colors.deepPurple);
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(productName),
+        title: Text(productname),
       ),
   
 
@@ -65,3 +67,9 @@ class Dashboard extends StatelessWidget {
     );
   }
 }
+
+
+
+//create flutter app which have 3 tab check status and collumn
+
+//on check display tittlw subtittle same for collumn satus same for 

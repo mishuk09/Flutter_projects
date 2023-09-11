@@ -1,3 +1,8 @@
+import 'dart:io';
+
 void main() {
-  print('Hello');
+  print('Take value from users');
+  stdout.write("Enter your value:");
+  var name = stdin.readLineSync();
+  print(name);
 }
