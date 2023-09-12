@@ -59,3 +59,5 @@ class _CalculatorState extends State<Calculator> {
         ));
   }
 }
+
+//create a string if weith is less than 500 display two cards if that is 700 print 3 cards if more than than 700 tha 4 card
